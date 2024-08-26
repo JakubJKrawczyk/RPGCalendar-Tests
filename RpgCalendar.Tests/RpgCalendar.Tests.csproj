@@ -22,4 +22,13 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestsStatics\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RpgCalendar.Utillities\RpgCalendar.Utillities.csproj" />
+      <ProjectReference Include="..\RpgCalendar.WebService\RpgCalendar.WebService.csproj" />
+    </ItemGroup>
+
 </Project>

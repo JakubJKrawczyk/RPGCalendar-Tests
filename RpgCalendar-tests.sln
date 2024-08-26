@@ -1,10 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar-tests", "RpgCalendar-tests\RpgCalendar-tests.csproj", "{9C622723-92CC-494E-AA88-A216763697C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.Tests", "RpgCalendar.Tests\RpgCalendar.Tests.csproj", "{9C622723-92CC-494E-AA88-A216763697C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar-WebService", "RpgCalendar-WebService\RpgCalendar-WebService.csproj", "{6B45513E-79F1-4ACA-BCA9-41D9100217FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.WebService", "RpgCalendar.WebService\RpgCalendar.WebService.csproj", "{6B45513E-79F1-4ACA-BCA9-41D9100217FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar-InternalApi", "RpgCalendar-InternalApi\RpgCalendar-InternalApi.csproj", "{430F85CB-1803-4A7A-9065-A4D02F3EA360}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.InternalApi", "RpgCalendar.InternalApi\RpgCalendar.InternalApi.csproj", "{430F85CB-1803-4A7A-9065-A4D02F3EA360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.Utillities", "RpgCalendar.Utillities\RpgCalendar.Utillities.csproj", "{9D5639F2-2473-43CC-8749-8EB0D35E4332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{430F85CB-1803-4A7A-9065-A4D02F3EA360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430F85CB-1803-4A7A-9065-A4D02F3EA360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430F85CB-1803-4A7A-9065-A4D02F3EA360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D5639F2-2473-43CC-8749-8EB0D35E4332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D5639F2-2473-43CC-8749-8EB0D35E4332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D5639F2-2473-43CC-8749-8EB0D35E4332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D5639F2-2473-43CC-8749-8EB0D35E4332}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
