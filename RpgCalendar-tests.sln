@@ -4,9 +4,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.Tests", "RpgCal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.WebService", "RpgCalendar.WebService\RpgCalendar.WebService.csproj", "{6B45513E-79F1-4ACA-BCA9-41D9100217FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.InternalApi", "RpgCalendar.InternalApi\RpgCalendar.InternalApi.csproj", "{430F85CB-1803-4A7A-9065-A4D02F3EA360}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.ApiClients", "RpgCalendar.ApiClients\RpgCalendar.ApiClients.csproj", "{430F85CB-1803-4A7A-9065-A4D02F3EA360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.Utillities", "RpgCalendar.Utillities\RpgCalendar.Utillities.csproj", "{9D5639F2-2473-43CC-8749-8EB0D35E4332}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCalendar.Utilities", "RpgCalendar.Utilities\RpgCalendar.Utilities.csproj", "{9D5639F2-2473-43CC-8749-8EB0D35E4332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,6 @@
-﻿using RestSharp;
-using RpgCalendar.Utillities;
+﻿using RpgCalendar.Utilities;
 
-namespace RpgCalendar_tests;
+namespace RpgCalendar.Tests;
 
 public class TestTemplate
 {

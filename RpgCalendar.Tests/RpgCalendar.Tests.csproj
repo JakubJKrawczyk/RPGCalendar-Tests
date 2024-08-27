@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>RpgCalendar_tests</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -23,11 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TestsStatics\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\RpgCalendar.Utillities\RpgCalendar.Utillities.csproj" />
       <ProjectReference Include="..\RpgCalendar.WebService\RpgCalendar.WebService.csproj" />
     </ItemGroup>
 

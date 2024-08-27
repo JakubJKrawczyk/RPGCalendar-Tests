@@ -1,6 +1,7 @@
-﻿using RpgCalendar.Utillities;
+﻿using RpgCalendar.Utilities;
+using RpgCalendar.Utilities.Tools;
 
-namespace RpgCalendar_tests.TestsInteractive;
+namespace RpgCalendar.Tests.InteractionsTests;
 
 public class RegisterUser : TestTemplate
 {
@@ -10,7 +11,7 @@ public class RegisterUser : TestTemplate
         string name = Rnd.String();
         Factory.PrepareUser(name);
 
-        var user = TestFactory.User;
+        var user = Factory.User;
 
         AssertAll.Succed(
             () => Assert.That(user.DisplayName, Is.EqualTo(name))

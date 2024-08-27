@@ -11,6 +11,16 @@ public class KeyCloakClient
     private string _clientSecret;
 
     private string _clientToken => GetClientToken();
+    
+    public KeyCloakClient()
+    {
+        _realm = "rpgcalendar";
+        _client = new RestClient(new RestClientOptions
+        {
+            BaseUrl = new Uri($"https://auth.dev.rpg-calenauth.dev.rpg-calendar.jakubkrawczyk.com/realms/{_realm}/"),
+        });
+            
+    }
 
     private string GetClientToken()
     {
@@ -37,26 +47,13 @@ public class KeyCloakClient
     {
         RestRequest request = new RestRequest($"users", Method.Get);
         request.AddHeader("Authorization", $"Bearer {GetClientToken()}");
-        request.AddParameter("username", username);
-        
-        
-    }
-    public KeyCloakClient()
-    {
-        _realm = "rpgcalendar";
-        _client = new RestClient(new RestClientOptions
-        {
-            BaseUrl = new Uri($"https://auth.dev.rpg-calenauth.dev.rpg-calendar.jakubkrawczyk.com/realms/{_realm}/"),
-        });
-            
+        request.AddParameter("username", username);   
     }
 
-    public void CreateUser(string username)
+    public KeyCloakClient(string keyCloakClientId, string keyCloakClientSecret, string keyCloakRealm)
     {
-        
+        throw new NotImplementedException();
     }
-    
-    
 }
 
 

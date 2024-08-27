@@ -1,4 +1,4 @@
-﻿namespace RpgCalendar.Utillities;
+﻿namespace RpgCalendar.Utilities.Tools;
 
 public class Rnd
 {

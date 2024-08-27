@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>RpgCalendar_InternalApi</RootNamespace>
+        <RootNamespace>RpgCalendar.Utilities</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>RpgCalendar.Utilities</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
