@@ -2,5 +2,5 @@
 
 public class Consts
 {
-    public static string CONFIG_API_PATH = "envs.txt";
+    public static string CONFIG_API_PATH = "envs.json";
 }
