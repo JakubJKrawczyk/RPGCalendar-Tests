@@ -1,8 +1,8 @@
 ﻿using RpgCalendar_InternalApi.ExternalClients;
-using RpgCalendar_WebService;
 using RpgCalendar.ApiClients.InternalApi;
 using RpgCalendar.Utilities;
 using RpgCalendar.Utilities.Tools;
+using RpgCalendar.WebService;
 
 namespace RpgCalendar.Tests;
 

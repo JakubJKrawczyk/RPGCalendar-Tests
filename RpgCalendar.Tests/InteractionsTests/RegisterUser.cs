@@ -13,7 +13,7 @@ public class RegisterUser : TestTemplate
 
         var user = Factory.User;
 
-        AssertAll.Succed(
+        AssertAll.Succeed(
             () => Assert.That(user.DisplayName, Is.EqualTo(name))
         );
     }

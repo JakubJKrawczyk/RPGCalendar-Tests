@@ -1,10 +1,16 @@
 ﻿using RpgCalendar.ApiClients.ConfigApi;
 
-namespace RpgCalendar_WebService;
+namespace RpgCalendar.WebService;
 
-public record KeycloakData(string ClientId, string ClientSecret, string Realm);
+public class KeycloakData(keycloakData keycloakData)
+{
+    private readonly keycloakData kd = keycloakData;
+    public string ClientId => kd.ClientId;
+    public string ClientSecret => kd.ClientSecret;
+    public string Realm => kd.Realm;
+}
 
 public static class Config
 {
-    public static KeycloakData KeyCloak { get; }
+    public static KeycloakData KeyCloak => new KeycloakData(new ConfigApiClient().GetKeycloakConfig());
 }

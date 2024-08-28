@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="NUnit" Version="4.2.1" />
       <PackageReference Include="RestSharp" Version="111.4.1" />
     </ItemGroup>
 
