@@ -12,6 +12,7 @@ public class ConfigApiClient
 
     public keycloakData GetKeycloakConfig()
     {
-        throw new NotImplementedException();
+        return new keycloakData("test-api", "RuiImFCuqzPSrZaikERyQfAwm6iARLnZ", "rpgcalendar", 
+            "https://auth.dev.rpg-calendar.jakubkrawczyk.com");
     }
 }
