@@ -1,0 +1,2 @@
+﻿dupa=twoja
+marcel=chybatwoja
