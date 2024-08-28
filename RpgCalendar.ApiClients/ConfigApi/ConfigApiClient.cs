@@ -3,7 +3,7 @@ using RpgCalendar.Utilities;
 
 namespace RpgCalendar.ApiClients.ConfigApi;
 
-public record keycloakData(string ClientId, string ClientSecret, string Realm);
+public record keycloakData(string ClientId, string ClientSecret, string Realm, string Host);
 
 public class ConfigApiClient
 {

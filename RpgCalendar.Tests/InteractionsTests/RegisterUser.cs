@@ -9,10 +9,9 @@ public class RegisterUser : TestTemplate
     public void Register()
     {
         string name = Rnd.String();
-        Factory.PrepareUser(name);
-
-        var user = Factory.User;
-
+        
+        Factory.PrepareUser(out var user, name);
+        
         AssertAll.Succeed(
             () => Assert.That(user.DisplayName, Is.EqualTo(name))
         );

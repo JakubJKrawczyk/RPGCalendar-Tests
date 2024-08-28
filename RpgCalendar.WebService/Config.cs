@@ -8,6 +8,7 @@ public class KeycloakData(keycloakData keycloakData)
     public string ClientId => kd.ClientId;
     public string ClientSecret => kd.ClientSecret;
     public string Realm => kd.Realm;
+    public string Host => kd.Host;
 }
 
 public static class Config
