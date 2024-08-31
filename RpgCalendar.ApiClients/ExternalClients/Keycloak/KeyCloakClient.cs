@@ -2,6 +2,7 @@
 using RpgCalendar.ApiClients.ConfigApi;
 using RpgCalendar.ApiClients.InternalApi.Models;
 using RpgCalendar.Utilities;
+using RpgCalendar.Utilities.Extensions;
 
 namespace RpgCalendar.ApiClients.ExternalClients.Keycloak;
 
@@ -22,7 +23,6 @@ public class KeyCloakClient
         _realm = configClient.Realm;
         _client = new RestClient($"{configClient.Host}", 
             options => options.RemoteCertificateValidationCallback = (_, _, _, _) => true);
-        _client.AddDefaultParameter("Content-Type", ContentType.FormUrlEncoded);
     }
     
     private T Execute<T>(RestRequest request)
@@ -46,7 +46,8 @@ public class KeyCloakClient
     private string GetClientToken()
     {
         RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
-        
+        request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
+
         request.AddParameter("grant_type", "client_credentials");
         request.AddParameter("client_id", _clientId);
         request.AddParameter("client_secret", _clientSecret);
@@ -57,8 +58,11 @@ public class KeyCloakClient
     public userCredentials GetUserToken(string username, string password = Consts.DefaultPassword)
     {
         RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
+        request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
         
         request.AddParameter("grant_type", "password");
+        request.AddParameter("client_id", _clientId);
+        request.AddParameter("client_secret", _clientSecret);
         request.AddParameter("username", username);
         request.AddParameter("password", password);
 
@@ -69,12 +73,12 @@ public class KeyCloakClient
     
     public userCredentials AddUser(string username, string password = Consts.DefaultPassword)
     {
-        RestRequest request = new RestRequest($"admin/realms/{_realm}/users", Method.Post);
+        RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/", Method.Post);
         request.AddHeader("Authorization", $"Bearer {ClientToken}");
         request.AddOrUpdateHeader("Content-Type", ContentType.Json);
         var body = new kcUserModel(username, username, username, $"{username}@{Consts.EmailDomain}", true,
             [new kcUserCredentials("password", password, false)]);
-        request.AddJsonBody(body);
+        request.AddJson(body);
 
         Execute(request);
         
@@ -84,9 +88,10 @@ public class KeyCloakClient
 
 public class KeyCloakException : Exception
 {
-    public KeyCloakException(RestResponse response) : base(response.ErrorMessage)
+    private readonly RestResponse _response;
+    public KeyCloakException(RestResponse response) : base(response.FromErrorMessage())
     {
-        
+        _response = response;
     }
 }
 
