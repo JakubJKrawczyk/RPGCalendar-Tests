@@ -1,8 +1,6 @@
 ﻿services:
   rpgcalendar.configapi:
-    image: rpgcalendar.configapi
-    build:
-      context: .
-      dockerfile: RpgCalendar.ConfigApi/Dockerfile
+    image: registry.jakubkrawczyk.com/rpgcalendar.configapi
+    container_name: config-api
     ports:
       - 8080:8080
