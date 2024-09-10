@@ -1,6 +1,5 @@
 ﻿services:
   rpgcalendar.configapi:
-    image: registry.jakubkrawczyk.com/rpgcalendar.configapi
-    container_name: config-api
+    image: registry.jakubkrawczyk.com/rpg-calendar/configapi
     ports:
-      - 8080:8080
+      - 11080:8080
