@@ -1,3 +1,7 @@
 ﻿services:
   rpgcalendar.tests:
       image: registry.jakubkrawczyk.com/rpg-calendar/tests
+      environment:
+       TESTS_ENVIRONMENT: dev
+       TESTS_CONFIG_API: https://config.rpg-calednar.jakubkrawczyk.com
+       API_URL: https://testapi.rpg-calendar.jakubkrawczyk.com

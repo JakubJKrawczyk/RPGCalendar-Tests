@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
 USER $APP_UID
 WORKDIR /app
 
@@ -21,4 +21,4 @@ RUN dotnet publish "RpgCalendar.Tests.csproj" -c $BUILD_CONFIGURATION -o /app/pu
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RpgCalendar.Tests.dll"]
+ENTRYPOINT ["dotnet", "vstest", "RpgCalendar.Tests.dll", "--logger=\"apiLogger\"", "--","NUnit.ShowInternalProperties=true"]
