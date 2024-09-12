@@ -1,0 +1,3 @@
+﻿services:
+  rpgcalendar.tests:
+      image: registry.jakubkrawczyk.com/rpg-calendar/tests
