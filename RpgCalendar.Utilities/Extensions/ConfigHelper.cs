@@ -4,7 +4,7 @@ namespace RpgCalendar.Utilities.Extensions;
 
 public class ConfigHelper
 {
-    private static RestClient _client = new RestClient("https://dev.rpg-calendar.jakubkrawczyk.com");
+    private static RestClient _client = new RestClient("https://config.rpg-calendar.jakubkrawczyk.com/");
     public record configRecord(
         string KEYCLOAK_CLIENTID,
         string KEYCLOAK_CLIENTSECRET,
@@ -18,16 +18,16 @@ public class ConfigHelper
         private static configRecord getConfig()
         {
             RestRequest request = new RestRequest("/config");
-            var response = _client.Execute<Dictionary<string, string>>(request).Data;
+            var response = _client.Execute<Dictionary<string, string>>(request);
 
-            if(response is null) throw new NullReferenceException("Config is null");
+            if(response.Data is null) throw new NullReferenceException("Config is null");
             return new configRecord(
-                response["KEYCLOAK_CLIENTID"],
-                response["KEYCLOAK_CLIENTSECRET"],
-                response["KEYCLOAK_REALM"],
-                response["KEYCLOAK_HOST"],
-                response["TESTS_CONFIG_API"],
-                response["TESTS_ENVIRONMENT"]
+                response.Data["KEYCLOAK_CLIENTID"],
+                response.Data["KEYCLOAK_CLIENTSECRET"],
+                response.Data["KEYCLOAK_REALM"],
+                response.Data["KEYCLOAK_HOST"],
+                response.Data["TESTS_CONFIG_API"],
+                response.Data["TESTS_ENVIRONMENT"]
                 );
         }
     #endregion

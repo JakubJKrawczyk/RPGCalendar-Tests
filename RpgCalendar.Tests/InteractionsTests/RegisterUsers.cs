@@ -21,7 +21,18 @@ public class RegisterUsers : TestTemplate
                 () => Assert.That(user.DisplayName, Is.EqualTo(name))
             );
         }
-    
+        
+        [Test]
+        public void RegisterUser_WithEmptyName_ShouldFail()
+        {
+            string emptyname = string.Empty;
+
+            var user = User.Prepare(emptyname).Create();
+
+            AssertAll.Succeed(
+                () => Assert.That(user.DisplayName, Is.EqualTo("User name cannot be empty")));
+        }
+        
     #endregion
     
 }
