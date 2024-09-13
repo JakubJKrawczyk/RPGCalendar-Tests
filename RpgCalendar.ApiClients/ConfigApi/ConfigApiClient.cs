@@ -14,10 +14,10 @@ public class ConfigApiClient
     public keycloakData GetKeycloakConfig()
     {
         return new keycloakData(
-            ConfigHelper.Config.KEYCLOAK_CLIENTID,
-            ConfigHelper.Config.KEYCLOAK_CLIENTSECRET,
-            ConfigHelper.Config.KEYCLOAK_REALM,
-            ConfigHelper.Config.KEYCLOAK_HOST
+            ConfigHelper.Config.KeycloakClientId,
+            ConfigHelper.Config.KeycloakClientSecret,
+            ConfigHelper.Config.KeycloakRealm,
+            ConfigHelper.Config.KeycloakHost
             );
     }
 }
