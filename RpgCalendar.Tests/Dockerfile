@@ -22,4 +22,4 @@ RUN dotnet workload update
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "vstest", "RpgCalendar.Tests.dll", "--logger=\"apilogger\"", "--","NUnit.ShowInternalProperties=true"]
+ENTRYPOINT ["dotnet", "vstest", "RpgCalendar.Tests.dll", "--logger:apilogger", "--","NUnit.ShowInternalProperties=true"]
