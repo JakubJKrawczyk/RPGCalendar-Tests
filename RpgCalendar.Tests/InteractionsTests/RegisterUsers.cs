@@ -27,10 +27,10 @@ public class RegisterUsers : TestTemplate
         {
             string emptyname = string.Empty;
 
-            var user = User.Prepare(emptyname).Create();
+            var user = User.Prepare(emptyname);
 
             AssertAll.Succeed(
-                () => Assert.That(user.DisplayName, Is.EqualTo("User name cannot be empty")));
+                () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<Exception>()));
         }
         
     #endregion
