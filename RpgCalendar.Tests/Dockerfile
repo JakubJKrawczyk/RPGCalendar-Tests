@@ -17,8 +17,9 @@ RUN dotnet build "RpgCalendar.Tests.csproj" -c $BUILD_CONFIGURATION -o /app/buil
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "RpgCalendar.Tests.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet workload update
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "vstest", "RpgCalendar.Tests.dll", "--logger=\"apiLogger\"", "--","NUnit.ShowInternalProperties=true"]
+ENTRYPOINT ["dotnet", "vstest", "RpgCalendar.Tests.dll", "--logger=\"apilogger\"", "--","NUnit.ShowInternalProperties=true"]
