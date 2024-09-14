@@ -1,6 +1,6 @@
-@RpgCalendar.ConfigApi_HostAddress = http://localhost:5091
+@RpgCalendar.ConfigApi_HostAddress = http://localhost:8080
 
-GET {{RpgCalendar.ConfigApi_HostAddress}}/weatherforecast/
+GET {{RpgCalendar.ConfigApi_HostAddress}}/config/dev
 Accept: application/json
 
 ###

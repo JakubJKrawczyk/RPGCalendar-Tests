@@ -9,7 +9,10 @@ public record keycloakData(string ClientId, string ClientSecret, string Realm, s
 public class ConfigApiClient
 {
     private static RestClient? _client;
-    private static RestClient Client => _client ??= new RestClient(EnvironmentData.ConfigApiUrl);
+    private static RestClient Client => _client ??= new RestClient(EnvironmentData.ConfigApiUrl, options =>
+    {
+        options.RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+    });
 
     public keycloakData GetKeycloakConfig()
     {

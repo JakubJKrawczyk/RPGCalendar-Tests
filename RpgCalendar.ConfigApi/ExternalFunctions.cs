@@ -7,18 +7,28 @@ namespace RpgCalendar.ConfigApi;
 public class ExternalFunctions
 {
     private static Regex regex = new("^[a-zA-Z]+=.+$");
-    public static Dictionary<string, object> GetEnvs()
+    public static Models.EnvContainer GetEnvs(string environment)
     {
         if (File.Exists(Consts.CONFIG_API_PATH))
         {
-            var text = File.ReadAllText(Consts.CONFIG_API_PATH);
-
-            return JsonSerializer.Deserialize<Dictionary<string, object>>(text);
             
+            var text = File.ReadAllText(Consts.CONFIG_API_PATH);
+            var deserialized = JsonSerializer.Deserialize<Models.EnvContainer>(text);
+            if(deserialized is not null) return deserialized;
+            throw new ConfigException(environment, "Config envs are null.");
             
         }
 
-        return null;
+        return null!;
+    }
+}
 
+
+
+public class ConfigException : Exception
+{
+    public ConfigException(string environment,string message) : base($"ConfigAPI ({environment}): {message}")
+    {
+        
     }
 }

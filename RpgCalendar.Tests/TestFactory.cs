@@ -1,4 +1,4 @@
-﻿using RpgCalendar.Utilities.Tools;
+﻿using RpgCalendar.Utilities;
 using RpgCalendar.WebService;
 
 namespace RpgCalendar.Tests;

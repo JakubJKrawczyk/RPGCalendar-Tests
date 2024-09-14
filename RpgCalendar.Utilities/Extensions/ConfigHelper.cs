@@ -15,7 +15,7 @@ public class ConfigHelper
     #region prywatne metody
         private static configRecord getConfig()
         {
-            RestRequest request = new RestRequest("/config");
+            RestRequest request = new RestRequest($"/config/{EnvironmentData.TestsEnv}");
             var response = _client.Execute<configRecord>(request);
             return response.Data ?? throw new NullReferenceException();
         }

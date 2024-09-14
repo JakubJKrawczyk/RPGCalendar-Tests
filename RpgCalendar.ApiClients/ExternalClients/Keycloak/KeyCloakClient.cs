@@ -11,7 +11,6 @@ public class KeyCloakClient
     private readonly string _clientId;
     private readonly string _clientSecret;
     private readonly string _realm;
-
     private string ClientToken => GetClientToken();
 
     public KeyCloakClient()
@@ -75,6 +74,7 @@ public class KeyCloakClient
     #endregion
 
     #region Users
+        
         public (userCredentials, kcUserModel) AddUser(string username, string password = Consts.DefaultPassword)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/", Method.Post);
@@ -89,15 +89,14 @@ public class KeyCloakClient
             
             return (GetUserToken(username, password), GetUser(username, username, username, email));
         }
-
+        
         public Success DeleteUser(string userid)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/{userid}", Method.Delete);
 
             return Execute<Success>(request);
         }
-
-
+        
         public kcUserModel GetUser(string username, string firstname, string lastname, string email)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users", Method.Get);
@@ -109,7 +108,7 @@ public class KeyCloakClient
             
             return Execute<kcUserModel>(request);
         }
-
+        
         public kcUserModel GetUserById(string userId)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/{userId}", Method.Get);
@@ -118,8 +117,6 @@ public class KeyCloakClient
         }
         
     #endregion
-    
-    
     
 }
 

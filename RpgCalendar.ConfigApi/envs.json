@@ -1,10 +1,11 @@
 ﻿{
-    "KEYCLOAK_CLIENTID":"test-api",
-    "KEYCLOAK_CLIENTSECRET":"RuiImFCuqzPSrZaikERyQfAwm6iARLnZ",
-    "KEYCLOAK_REALM":"rpgcalendar",
-    "KEYCLOAK_HOST":"https://auth.dev.rpg-calendar.jakubkrawczyk.com",
+    "dev": {
+        "KEYCLOAK_CLIENTID":"test-api",
+        "KEYCLOAK_CLIENTSECRET":"RuiImFCuqzPSrZaikERyQfAwm6iARLnZ",
+        "KEYCLOAK_REALM":"rpgcalendar",
+        "KEYCLOAK_HOST":"https://auth.dev.rpg-calendar.jakubkrawczyk.com",
+
+    }
     
-    "TESTS_CONFIG_API": "https://testapi.rpg-calednar.jakubkrawczyk.com",
-    "TESTS_ENVIRONMENT": "dev"
     
 }

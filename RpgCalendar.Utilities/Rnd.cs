@@ -1,4 +1,4 @@
-﻿namespace RpgCalendar.Utilities.Tools;
+﻿namespace RpgCalendar.Utilities;
 
 public class Rnd
 {
@@ -6,7 +6,7 @@ public class Rnd
     {
         var random = Random.Shared;
         
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return new string(Enumerable.Repeat(chars, letters)
             .Select(s => s[random.Next(s.Length)]).ToArray());
         

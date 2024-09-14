@@ -16,7 +16,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/config", () => ExternalFunctions.GetEnvs())
+app.MapGet("/config/{environment}", ExternalFunctions.GetEnvs)
     .WithName("GetEnvs")
     .WithOpenApi();
 

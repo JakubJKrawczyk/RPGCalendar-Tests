@@ -1,5 +1,4 @@
 ﻿using RpgCalendar.Utilities;
-using RpgCalendar.Utilities.Tools;
 using RpgCalendar.WebService;
 
 namespace RpgCalendar.Tests.InteractionsTests;
@@ -20,7 +19,7 @@ public class RegisterUsers : TestTemplate
     #region Add
     
         [Test]
-        public void RegisterUser()
+        public void RegisterValidUser()
         {
             string name = Rnd.String();
 
@@ -31,17 +30,33 @@ public class RegisterUsers : TestTemplate
             );
         }
         
-        [Test]
-        public void RegisterUser_WithEmptyName_ShouldFail()
+        [TestCaseSource(nameof(GenerateInvalidUsernames))]
+        [Description("Check if user exists")]
+        public void RegisterInvalidUser(string username)
         {
-            string emptyname = string.Empty;
-
-            user = User.Prepare(emptyname);
+            user = User.Prepare(username);
 
             AssertAll.Succeed(
                 () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<Exception>()));
         }
         
+        
     #endregion
-    
+
+    #region TestCases
+
+        private static List<string> GenerateInvalidUsernames =>
+        [
+            Rnd.String(33),
+            string.Join("", Enumerable.Repeat(" ", 16)),
+            "!@#$%^&*()_+{}|{}|",
+            " d u p a ",
+            "@koza XD ",
+            "\ud83d\udc58\n\ud83d\uddfb\n\ud83d\uddfc\n\ud83c\udf8b",
+            "PAL GUME-",
+            "\u2702\ufe0f 🤨\ud83c\udf4f"
+        ];
+
+    #endregion
+
 }
