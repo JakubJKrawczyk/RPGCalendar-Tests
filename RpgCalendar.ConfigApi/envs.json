@@ -1,8 +1,12 @@
 ﻿{
-    "dev": {
-        "KEYCLOAK_CLIENTID":"test-api",
-        "KEYCLOAK_CLIENTSECRET":"RuiImFCuqzPSrZaikERyQfAwm6iARLnZ",
-        "KEYCLOAK_REALM":"rpgcalendar",
-        "KEYCLOAK_HOST":"https://auth.dev.rpg-calendar.jakubkrawczyk.com"
-    }
+    "Containers": [
+        {
+            "dev": {
+                "KEYCLOAK_CLIENTID":"test-api",
+                "KEYCLOAK_CLIENTSECRET":"RuiImFCuqzPSrZaikERyQfAwm6iARLnZ",
+                "KEYCLOAK_REALM":"rpgcalendar",
+                "KEYCLOAK_HOST":"https://auth.dev.rpg-calendar.jakubkrawczyk.com"
+            } 
+        }
+    ]
 }

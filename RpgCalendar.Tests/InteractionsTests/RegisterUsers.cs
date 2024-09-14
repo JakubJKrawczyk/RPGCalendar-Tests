@@ -4,8 +4,8 @@ using RpgCalendar.WebService;
 namespace RpgCalendar.Tests.InteractionsTests;
 
 public class RegisterUsers : TestTemplate
-
 {
+    
     private User user;
     
     [OneTimeTearDown]
@@ -40,9 +40,8 @@ public class RegisterUsers : TestTemplate
                 () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<Exception>()));
         }
         
-        
+    
     #endregion
-
     #region TestCases
 
         private static List<string> GenerateInvalidUsernames =>
