@@ -3,7 +3,6 @@ using RpgCalendar.ApiClients.ConfigApi;
 using RpgCalendar.ApiClients.InternalApi.Models;
 using RpgCalendar.Utilities;
 using RpgCalendar.Utilities.Extensions;
-
 namespace RpgCalendar.ApiClients.ExternalClients.Keycloak;
 
 public class KeyCloakClient
@@ -43,47 +42,85 @@ public class KeyCloakClient
         return true;
     }
 
-    private string GetClientToken()
-    {
-        RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
-        request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
-
-        request.AddParameter("grant_type", "client_credentials");
-        request.AddParameter("client_id", _clientId);
-        request.AddParameter("client_secret", _clientSecret);
-
-        return Execute<clientToken>(request).access_token;
-    }
+    #region tokens
     
-    public userCredentials GetUserToken(string username, string password = Consts.DefaultPassword)
-    {
-        RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
-        request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
+        private string GetClientToken()
+        {
+            RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
+            request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
+
+            request.AddParameter("grant_type", "client_credentials");
+            request.AddParameter("client_id", _clientId);
+            request.AddParameter("client_secret", _clientSecret);
+
+            return Execute<clientToken>(request).access_token;
+        }
         
-        request.AddParameter("grant_type", "password");
-        request.AddParameter("client_id", _clientId);
-        request.AddParameter("client_secret", _clientSecret);
-        request.AddParameter("username", username);
-        request.AddParameter("password", password);
+        public userCredentials GetUserToken(string username, string password = Consts.DefaultPassword)
+        {
+            RestRequest request = new RestRequest($"realms/{_realm}/protocol/openid-connect/token", Method.Post);
+            request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
+            
+            request.AddParameter("grant_type", "password");
+            request.AddParameter("client_id", _clientId);
+            request.AddParameter("client_secret", _clientSecret);
+            request.AddParameter("username", username);
+            request.AddParameter("password", password);
 
-        var resp = Execute<userToken>(request);
+            var resp = Execute<userToken>(request);
 
-        return new userCredentials(username, password, resp.access_token);
-    }
+            return new userCredentials(username, password, resp.access_token);
+        }
+        
+    #endregion
+
+    #region Users
+        public (userCredentials, kcUserModel) AddUser(string username, string password = Consts.DefaultPassword)
+        {
+            RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/", Method.Post);
+            var email = $"{username}@{Consts.EmailDomain}";
+            request.AddHeader("Authorization", $"Bearer {ClientToken}");
+            request.AddOrUpdateHeader("Content-Type", ContentType.Json);
+            var body = new kcUserModel(username, username, username, email , true,
+                [new kcUserCredentials("password", password, false)]);
+            request.AddJson(body);
+
+            Execute(request);
+            
+            return (GetUserToken(username, password), GetUser(username, username, username, email));
+        }
+
+        public Success DeleteUser(string userid)
+        {
+            RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/{userid}", Method.Delete);
+
+            return Execute<Success>(request);
+        }
+
+
+        public kcUserModel GetUser(string username, string firstname, string lastname, string email)
+        {
+            RestRequest request = new RestRequest($"/admin/realms/{_realm}/users", Method.Get);
+            
+            request.AddParameter("firstName", firstname);
+            request.AddParameter("lastName", lastname);
+            request.AddParameter("username", username);
+            request.AddParameter("email", email);
+            
+            return Execute<kcUserModel>(request);
+        }
+
+        public kcUserModel GetUserById(string userId)
+        {
+            RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/{userId}", Method.Get);
+
+            return Execute<kcUserModel>(request);
+        }
+        
+    #endregion
     
-    public userCredentials AddUser(string username, string password = Consts.DefaultPassword)
-    {
-        RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/", Method.Post);
-        request.AddHeader("Authorization", $"Bearer {ClientToken}");
-        request.AddOrUpdateHeader("Content-Type", ContentType.Json);
-        var body = new kcUserModel(username, username, username, $"{username}@{Consts.EmailDomain}", true,
-            [new kcUserCredentials("password", password, false)]);
-        request.AddJson(body);
-
-        Execute(request);
-        
-        return GetUserToken(username, password);
-    }
+    
+    
 }
 
 public class KeyCloakException : Exception
@@ -95,17 +132,5 @@ public class KeyCloakException : Exception
     }
 }
 
-// ReSharper disable NotAccessedPositionalProperty.Global
-// ReSharper disable InconsistentNaming
-// ReSharper disable ClassNeverInstantiated.Global
-public record clientToken(string access_token, int expires_in, int refresh_expires_in, string token_type,
-    int not_before_policy, string scope);
 
-public record userToken(string access_token, int expires_in, int refresh_expires_in, string refresh_token,
-    string token_type, int not_before_policy, string session_state, string scope);
-
-public record kcUserModel(string firstName, string lastName, string username, string email,
-    bool enabled, kcUserCredentials[] credentials);
-
-public record kcUserCredentials(string type, string value, bool temporary);
 

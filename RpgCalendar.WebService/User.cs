@@ -14,6 +14,7 @@ public class User()
     
     private user u;
     private userCredentials uc;
+    private kcUserModel kcu;
     
     public Guid UserId => u.id;
     public string DisplayName => u.displayName;
@@ -27,7 +28,25 @@ public class User()
     public User Create()
     {
         var keycloakClient = new KeyCloakClient();
-        uc = keycloakClient.AddUser(uc.username, uc.password);
+        (userCredentials kredki, kcUserModel user) response = keycloakClient.AddUser(uc.username, uc.password);
+
+        uc = response.kredki;
+        kcu = response.user;
         return this;
     }
+
+    public Success Delete()
+    {
+        throw new NotImplementedException();
+    }
+    public User Refresh()
+    {
+        if(kcu.id is null) throw new NullReferenceException("Keycloak client id is null. Refresh is impossible.");
+        
+        var keycloakClient = new KeyCloakClient();
+        kcu = keycloakClient.GetUserById(kcu.id);
+
+        return this;
+    }
+    
 }

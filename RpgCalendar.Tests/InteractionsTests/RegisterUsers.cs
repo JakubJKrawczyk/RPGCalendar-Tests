@@ -7,6 +7,15 @@ namespace RpgCalendar.Tests.InteractionsTests;
 public class RegisterUsers : TestTemplate
 
 {
+    private User user;
+    
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        user.Delete();
+        
+        //TODO: Zaimplementowac kody bledow
+    }
     
     #region Add
     
@@ -15,7 +24,7 @@ public class RegisterUsers : TestTemplate
         {
             string name = Rnd.String();
 
-            var user = User.Prepare(name).Create();
+            user = User.Prepare(name).Create();
         
             AssertAll.Succeed(
                 () => Assert.That(user.DisplayName, Is.EqualTo(name))
@@ -27,7 +36,7 @@ public class RegisterUsers : TestTemplate
         {
             string emptyname = string.Empty;
 
-            var user = User.Prepare(emptyname);
+            user = User.Prepare(emptyname);
 
             AssertAll.Succeed(
                 () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<Exception>()));
