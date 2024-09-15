@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\RpgCalendar.ConfigApi\RpgCalendar.ConfigApi.csproj" />
       <ProjectReference Include="..\RpgCalendar.Utilities\RpgCalendar.Utilities.csproj" />
     </ItemGroup>
 

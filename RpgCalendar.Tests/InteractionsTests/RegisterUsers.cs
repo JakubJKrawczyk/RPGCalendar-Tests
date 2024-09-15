@@ -11,7 +11,7 @@ public class RegisterUsers : TestTemplate
     [OneTimeTearDown]
     public void OneTimeTearDown()
     {
-        user.Delete();
+        //user.Delete();
         
         //TODO: Zaimplementowac kody bledow
     }

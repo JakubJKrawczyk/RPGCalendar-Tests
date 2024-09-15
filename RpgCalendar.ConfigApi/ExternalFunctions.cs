@@ -8,9 +8,9 @@ public static class ExternalFunctions
 {
     public static Dictionary<string, string> GetEnvs(string environment)
     {
-        if (File.Exists(Consts.CONFIG_API_PATH))
+        if (File.Exists(ConfigConsts.CONFIG_API_PATH))
         {
-            var text = File.ReadAllText(Consts.CONFIG_API_PATH);
+            var text = File.ReadAllText(ConfigConsts.CONFIG_API_PATH);
             var deserialized = JsonSerializer.Deserialize<Models.EnvContainers>(text);
             if (deserialized is not null)
             {
@@ -31,9 +31,9 @@ public static class ExternalFunctions
 
     public static List<string> GetEnvsNames(string environment)
     {
-        if (File.Exists(Consts.CONFIG_API_PATH))
+        if (File.Exists(ConfigConsts.CONFIG_API_PATH))
         {
-            var text = File.ReadAllText(Consts.CONFIG_API_PATH);
+            var text = File.ReadAllText(ConfigConsts.CONFIG_API_PATH);
             var deserialized = JsonSerializer.Deserialize<Models.EnvContainers>(text);
             if (deserialized is not null)
             {

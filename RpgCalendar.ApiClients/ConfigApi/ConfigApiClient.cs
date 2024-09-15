@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using RpgCalendar.ConfigApi;
 using RpgCalendar.Utilities;
 using RpgCalendar.Utilities.Extensions;
 
@@ -17,10 +18,10 @@ public class ConfigApiClient
     public keycloakData GetKeycloakConfig()
     {
         return new keycloakData(
-            ConfigHelper.Config.KeycloakClientId,
-            ConfigHelper.Config.KeycloakClientSecret,
-            ConfigHelper.Config.KeycloakRealm,
-            ConfigHelper.Config.KeycloakHost
+            ConfigHelper.Config[ConfigConsts.CONFIG_ENV_NAME_CLIENTID],
+            ConfigHelper.Config[ConfigConsts.CONFIG_ENV_NAME_CLIENTSECRET],
+            ConfigHelper.Config[ConfigConsts.CONFIG_ENV_NAME_REALM],
+            ConfigHelper.Config[ConfigConsts.CONFIG_ENV_NAME_HOST]
             );
     }
 }

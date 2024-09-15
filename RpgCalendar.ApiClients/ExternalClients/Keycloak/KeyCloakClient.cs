@@ -100,13 +100,15 @@ public class KeyCloakClient
         public kcUserModel GetUser(string username, string firstname, string lastname, string email)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users", Method.Get);
+            request.AddHeader("Content-Type", ContentType.FormUrlEncoded);
+            request.AddHeader("Authorization", $"Bearer {ClientToken}");
             
             request.AddParameter("firstName", firstname);
             request.AddParameter("lastName", lastname);
             request.AddParameter("username", username);
             request.AddParameter("email", email);
             
-            return Execute<kcUserModel>(request);
+            return Execute<kcUserModel[]>(request).First();
         }
         
         public kcUserModel GetUserById(string userId)

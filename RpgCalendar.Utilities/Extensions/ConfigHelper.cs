@@ -4,7 +4,10 @@ namespace RpgCalendar.Utilities.Extensions;
 
 public class ConfigHelper
 {
-    private static RestClient _client = new RestClient("https://config.rpg-calendar.jakubkrawczyk.com/");
+    private static RestClient _client = new RestClient("https://config.rpg-calendar.jakubkrawczyk.com/", options =>
+    {
+        options.RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+    });
     public record configRecord(
         string KeycloakClientId,
         string KeycloakClientSecret,
@@ -13,15 +16,15 @@ public class ConfigHelper
     );
     
     #region prywatne metody
-        private static configRecord getConfig()
+        private static Dictionary<string, string> getConfig()
         {
             RestRequest request = new RestRequest($"/{EnvironmentData.TestsEnv}");
-            var response = _client.Execute<configRecord>(request);
+            var response = _client.Execute<Dictionary<string, string>>(request);
             return response.Data ?? throw new NullReferenceException();
         }
     #endregion
 
-    public static configRecord Config => getConfig();
+    public static Dictionary<string, string> Config => getConfig();
 
 
 }
