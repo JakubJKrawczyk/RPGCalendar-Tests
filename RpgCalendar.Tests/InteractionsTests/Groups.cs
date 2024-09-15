@@ -25,7 +25,7 @@ public class Groups : TestTemplate
         [Test]
         public void AddManyUsersToGroup()
         {
-                
+            throw new NotImplementedException(); 
         }
         [Test]
         public void AddUserToManyGroups()
