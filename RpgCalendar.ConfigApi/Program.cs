@@ -20,6 +20,7 @@ app.MapGet("/{environment}", ExternalFunctions.GetEnvs)
     .WithName("GetEnvs")
     .WithOpenApi();
 
+app.MapGet("/{environment}/keys", ExternalFunctions.GetEnvsNames).WithName("GetEnvsNames").WithOpenApi();
 app.Run();
 
 

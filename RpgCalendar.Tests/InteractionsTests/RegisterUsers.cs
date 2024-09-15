@@ -37,7 +37,7 @@ public class RegisterUsers : TestTemplate
             user = User.Prepare(username);
 
             AssertAll.Succeed(
-                () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<Exception>()));
+                () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<InternalAPIException>()));
         }
         
     
@@ -58,4 +58,11 @@ public class RegisterUsers : TestTemplate
 
     #endregion
 
+    private class InternalAPIException : Exception
+    {
+        public InternalAPIException()
+        {
+            
+        }
+    }
 }
