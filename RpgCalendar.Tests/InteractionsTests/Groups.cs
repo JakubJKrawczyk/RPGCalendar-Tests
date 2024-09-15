@@ -10,17 +10,17 @@ public class Groups : TestTemplate
         [Test]
         public void AddGroup()
         {
-
+            throw new NotImplementedException();
         }
         [Test]
         public void AddMemberToGroup()
         {
-                
+            throw new NotImplementedException();     
         }
         [Test]
         public void AddMemberAlreadyInGroup()
         {
-                
+            throw new NotImplementedException();     
         }
         [Test]
         public void AddManyUsersToGroup()
@@ -30,12 +30,12 @@ public class Groups : TestTemplate
         [Test]
         public void AddUserToManyGroups()
         {
-
+            throw new NotImplementedException();
         }
         [Test]
         public void AddMemberNotExistingToGroup()
         {
-                
+            throw new NotImplementedException();     
         }
 
     #endregion
@@ -45,12 +45,12 @@ public class Groups : TestTemplate
         [Test]
         public void DeleteGroup()
         {
-                
+            throw new NotImplementedException();   
         }
         [Test]
         public void DeleteUserNotInGroup()
         {
-                
+            throw new NotImplementedException();    
         }
         
     #endregion
@@ -60,7 +60,7 @@ public class Groups : TestTemplate
         [Test]
         public void ModifyGroup()
         {
-                
+            throw new NotImplementedException();     
         }
         
     #endregion
@@ -70,17 +70,17 @@ public class Groups : TestTemplate
         [Test]
         public void CheckSystemPreset()
         {
-                
+            throw new NotImplementedException();     
         }
         [Test]
         public void GenerateInviteLink()
         {
-                
+            throw new NotImplementedException();      
         }
         [Test]
         public void JoinByInviteId()
         {
-                
+            throw new NotImplementedException();      
         }
         
     #endregion
