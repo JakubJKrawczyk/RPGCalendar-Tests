@@ -18,7 +18,7 @@ public static class Consts
         public const string IMAGE_NOT_EXISTS = "Chosen image found in storage.";
         public const string USER_NOT_EXISTS = "User not exists.";
         public const string USER_ALREADY_IN_GROUP = "User is already in group.";
-        public const string INVITE_NOT_EXSITS = "Invite not exists.";
+        public const string INVITE_NOT_EXISTS  = "Invite not exists.";
         public const string CANNOT_REMOVE_OWNER = "Cannot remove owner from it's group.";
         public const string MEMBER_NOT_IN_GROUP = "Member already not in group.";
         public const string CANNOT_SET_OWNER_PERMISSION = "This endpoint cannot be used to set owner permission.";

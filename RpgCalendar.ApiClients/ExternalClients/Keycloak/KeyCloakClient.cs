@@ -23,6 +23,7 @@ public class KeyCloakClient
             options => options.RemoteCertificateValidationCallback = (_, _, _, _) => true);
     }
     
+    public static KeyCloakClient Instance { get; } = new KeyCloakClient();
     private T Execute<T>(RestRequest request)
     {
         var response = _client.Execute<T>(request);
@@ -75,7 +76,7 @@ public class KeyCloakClient
 
     #region Users
         
-        public (userCredentials, kcUserModel) AddUser(string username, string password = Consts.DefaultPassword)
+        public (userCredentials, kcUserModel) AddUser(string username,string password = Consts.DefaultPassword)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/", Method.Post);
             var email = $"{username}@{Consts.EmailDomain}";
@@ -84,7 +85,7 @@ public class KeyCloakClient
             var body = new kcUserModel(username, username, username, email , true,
                 [new kcUserCredentials("password", password, false)]);
             request.AddJson(body);
-
+            
             Execute(request);
             
             return (GetUserToken(username, password), GetUser(username, username, username, email));

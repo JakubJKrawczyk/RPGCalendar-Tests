@@ -1,4 +1,5 @@
 using RpgCalendar.ApiClients.ExternalClients.Keycloak;
+using RpgCalendar.ApiClients.InternalApi;
 using RpgCalendar.ApiClients.InternalApi.Models;
 using RpgCalendar.Utilities;
 
@@ -14,38 +15,54 @@ public class User()
     
     private user u;
     private userCredentials uc;
-    private kcUserModel kcu;
+    private kcUserModel? kcu;
     
     public Guid UserId => u.id;
     public string DisplayName => u.displayName;
     public string PrivateCode => u.privateCode;
 
+    
     public static User Prepare(string displayName) => new(new user()
         {
             displayName = displayName,
         });
 
+    public User WithToken(string token)
+    {
+        uc = uc with { token = token };
+
+        return this;
+    }
+    
     public User Create()
     {
-        var keycloakClient = new KeyCloakClient();
-        (userCredentials kredki, kcUserModel user) response = keycloakClient.AddUser(uc.username, uc.password);
-
+        //Strefa KeyCloak
+        var kClient = KeyCloakClient.Instance;
+        (userCredentials kredki, kcUserModel user) response = kClient.AddUser(uc.username,  uc.password);
         uc = response.kredki;
         kcu = response.user;
+        
+        //strefa internal API
+        InternalApiClient.Users.addUser(uc.username, uc.token);
+        
         return this;
     }
 
     public Success Delete()
     {
-        throw new NotImplementedException();
+        var keycloakClient = new KeyCloakClient();
+        if (kcu is null) throw new NullReferenceException("Keycloak client is null");
+        return keycloakClient.DeleteUser(kcu.id);
     }
+
+    
     public User Refresh()
     {
         if(kcu.id is null) throw new NullReferenceException("Keycloak client id is null. Refresh is impossible.");
         
         var keycloakClient = new KeyCloakClient();
         kcu = keycloakClient.GetUserById(kcu.id);
-
+        u = InternalApiClient.Users.getMe(uc.token);
         return this;
     }
     

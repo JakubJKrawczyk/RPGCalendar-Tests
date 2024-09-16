@@ -16,4 +16,8 @@
       <ProjectReference Include="..\RpgCalendar.Utilities\RpgCalendar.Utilities.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Extensions\" />
+    </ItemGroup>
+
 </Project>
