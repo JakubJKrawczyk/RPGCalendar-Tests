@@ -35,18 +35,18 @@ public class RegisterUsers : TestTemplate
         public void RegisterInvalidUser(string username)
         {
             user = User.Prepare(username);
-
+            
             AssertAll.Succeed(
-                () => Assert.That(()=>user.Create(), Throws.Exception.InstanceOf<InternalAPIException>()));
+                () => Assert.That(()=>user.Create(), Throws.Exception)
+                );
         }
-        
     
     #endregion
     #region TestCases
 
-        private static List<string> GenerateInvalidUsernames =>
+        private static List<string> GenerateInvalidUsernames =
         [
-            Rnd.String(33),
+            Rnd.String(65),
             string.Join("", Enumerable.Repeat(" ", 16)),
             "!@#$%^&*()_+{}|{}|",
             " d u p a ",

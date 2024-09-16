@@ -35,7 +35,7 @@ public class KeyCloakClient
     private bool Execute(RestRequest request)
     {
         var response = _client.Execute(request);
-
+        
         if (!response.IsSuccessful) throw new KeyCloakException(response);
         
         return true;
