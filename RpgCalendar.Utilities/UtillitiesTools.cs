@@ -9,7 +9,7 @@ namespace RpgCalendar.Utilities;
 
 public class UtillitiesTools
 {
-    public static string GenerateJwtToken(string content)
+    public static string GenerateJwtToken(string content, DateTime? expiry = null)
     {
         var claims = new[]
         {
@@ -21,7 +21,7 @@ public class UtillitiesTools
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddDays(1),
+            expires: expiry ?? DateTime.Now.AddDays(1),
             signingCredentials: credentials
         );
 

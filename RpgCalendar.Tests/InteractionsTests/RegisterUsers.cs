@@ -34,7 +34,7 @@ public class RegisterUsers : TestTemplate
         }
 
         [TestCaseSource(nameof(GenerateInvalidUsernames))]
-        [Description("Check if user exists")]
+        [Description("Test for creating user with invalid usernames")]
         public void RegisterInvalidUser(string username)
         {
             user = User.Prepare(username);
@@ -52,6 +52,16 @@ public class RegisterUsers : TestTemplate
             AssertAll.Succeed(
                 () => Assert.That(() => user.Create(), Throws.Exception)
                 );
+        }
+        
+        [Test]
+        public void RegisterWithExpiredToken()
+        {
+            var user = User.Prepare(Rnd.String()).WithToken(UtillitiesTools.GenerateJwtToken(Rnd.String(), DateTime.Now.AddDays(-1)));
+            
+            AssertAll.Succeed(
+                () => Assert.That(() => user.Create(), Throws.Exception)
+            );
         }
 
         [Test]
@@ -75,12 +85,23 @@ public class RegisterUsers : TestTemplate
         }
 
         [Test]
+        public void GetUserDataAfterRegistrationWithoutToken()
+        {
+            var user = User.Prepare(Rnd.String()).Create();
+            user.WithToken("");
+            
+            AssertAll.Succeed(() => Assert.That(() => user.Refresh(), Throws.Exception));
+        }
+        
+        [Test]
         public void GetUserDataAfterRegistration()
         {
             var user = User.Prepare(Rnd.String()).Create();
-
+            var tempName = user.DisplayName;
+            user.WithName(Rnd.String());
             user.Refresh();
-
+            
+            AssertAll.Succeed(() => Assert.That(user.DisplayName, Is.EqualTo(tempName)));
         }
         
     #endregion

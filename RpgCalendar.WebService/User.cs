@@ -33,7 +33,13 @@ public class User()
 
         return this;
     }
-    
+
+    public User WithName(string name)
+    {
+        u.displayName = name;
+
+        return this;
+    }
     public User Create()
     {
         //Strefa KeyCloak
@@ -54,7 +60,6 @@ public class User()
         if (kcu is null) throw new NullReferenceException("Keycloak client is null");
         return keycloakClient.DeleteUser(kcu.id);
     }
-
     
     public User Refresh()
     {

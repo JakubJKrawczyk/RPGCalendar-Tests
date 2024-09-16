@@ -10,7 +10,7 @@ public class InternalApiClient
 
     public static partial class Users
     {
-        private static RestClient _client => new RestClient("https://test-api.rpg-calendar.jakubkrawczyk.com", options =>
+        private static RestClient _client => new RestClient("https://dev.rpg-calendar.jakubkrawczyk.com", options =>
         {
             options.RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true;
         });
@@ -47,7 +47,7 @@ public class InternalApiClient
         
         public static user addUser(string displayName, string token)
         {
-            RestRequest request = new RestRequest("/users/", Method.Post);
+            RestRequest request = new RestRequest("users/", Method.Post);
             request.AddHeader("Authorization", $"Bearer {token}");
             request.AddBody(new { DisplayName=displayName });
                 
@@ -56,7 +56,7 @@ public class InternalApiClient
 
         public static user getMe(string userToken)
         {
-            RestRequest request = new RestRequest("/users/me", Method.Get);
+            RestRequest request = new RestRequest("users/me", Method.Get);
             request.AddHeader("Authorization", $"Bearer {userToken}");
                 
             return Execute<user>(request);
