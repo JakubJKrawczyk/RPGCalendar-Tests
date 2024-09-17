@@ -90,7 +90,7 @@ public class RegisterUsers : TestTemplate
             var user = User.Prepare(Rnd.String()).Create();
             user.WithToken("");
             
-            AssertAll.Succeed(() => Assert.That(() => user.Refresh(), Throws.Exception));
+            AssertAll.Succeed(() => Assert.That(() => user.GetMe(), Throws.Exception));
         }
         
         [Test]
@@ -99,7 +99,8 @@ public class RegisterUsers : TestTemplate
             var user = User.Prepare(Rnd.String()).Create();
             var tempName = user.DisplayName;
             user.WithName(Rnd.String());
-            user.Refresh();
+            
+            var us = user.GetMe();
             
             AssertAll.Succeed(() => Assert.That(user.DisplayName, Is.EqualTo(tempName)));
         }

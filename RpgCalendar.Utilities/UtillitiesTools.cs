@@ -13,18 +13,18 @@ public class UtillitiesTools
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.NameId, content)
+            new Claim(ClaimTypes.Authentication ,content)
         };
         
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes( "Jas"));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var token = new JwtSecurityToken(
             claims: claims,
             expires: expiry ?? DateTime.Now.AddDays(1),
             signingCredentials: credentials
         );
-
-        return token.ToString();
+        var tokenHandler = new JwtSecurityTokenHandler();
+        return tokenHandler.WriteToken(token);
     }
 }

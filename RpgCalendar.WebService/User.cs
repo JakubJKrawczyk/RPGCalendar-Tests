@@ -60,7 +60,21 @@ public class User()
         if (kcu is null) throw new NullReferenceException("Keycloak client is null");
         return keycloakClient.DeleteUser(kcu.id);
     }
-    
+
+    public User GetMe()
+    {
+        user me;
+        try
+        {
+            me = InternalApiClient.Users.getMe(uc.token);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+
+        return new User(me);
+    }
     public User Refresh()
     {
         if(kcu.id is null) throw new NullReferenceException("Keycloak client id is null. Refresh is impossible.");
