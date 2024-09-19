@@ -14,7 +14,7 @@ public static class RestSharpExtensions
 
                 Response: {response.Content}
 
-                Request: {response.Request.Parameters.Select(x => x.ToString()).Aggregate((x, y) => $"{x}\n\n{y}")}
+                Request: {string.Join("\n",response.Request.Parameters.Select(x => x.ToString()))}
                 
                 =======
                 """;

@@ -91,11 +91,11 @@ public class KeyCloakClient
             return (GetUserToken(username, password), GetUser(username, username, username, email));
         }
         
-        public Success DeleteUser(string userid)
+        public void DeleteUser(string userid)
         {
             RestRequest request = new RestRequest($"/admin/realms/{_realm}/users/{userid}", Method.Delete);
-
-            return Execute<Success>(request);
+            request.AddHeader("Authorization", $"Bearer {ClientToken}");
+            Execute(request);
         }
         
         public kcUserModel GetUser(string username, string firstname, string lastname, string email)

@@ -54,11 +54,11 @@ public class User()
         return this;
     }
 
-    public Success Delete()
+    public void Delete()
     {
         var keycloakClient = new KeyCloakClient();
         if (kcu is null) throw new NullReferenceException("Keycloak client is null");
-        return keycloakClient.DeleteUser(kcu.id);
+        keycloakClient.DeleteUser(kcu.id);
     }
 
     public User GetMe()

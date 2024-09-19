@@ -96,13 +96,11 @@ public class RegisterUsers : TestTemplate
         [Test]
         public void GetUserDataAfterRegistration()
         {
-            var user = User.Prepare(Rnd.String()).Create();
+            user = User.Prepare(Rnd.String()).Create();
             var tempName = user.DisplayName;
-            user.WithName(Rnd.String());
-            
             var us = user.GetMe();
             
-            AssertAll.Succeed(() => Assert.That(user.DisplayName, Is.EqualTo(tempName)));
+            AssertAll.Succeed(() => Assert.That(us.DisplayName, Is.EqualTo(tempName)));
         }
         
     #endregion
