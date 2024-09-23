@@ -33,7 +33,7 @@ public class InternalApiClient
             return true;
         }
         
-        private class InternalAPIException : Exception
+        public class InternalAPIException : Exception
         {
             public InternalAPIException(RestResponse response) : base(
                 $"API ERROR: Api sie poslizgnelo i pozdrawia z ziemi: {response.ErrorMessage} | Exception: {response.ErrorException}")

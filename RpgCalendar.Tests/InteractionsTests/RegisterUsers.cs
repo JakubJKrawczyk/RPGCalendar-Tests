@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.JsonWebTokens;
 using RestSharp.Authenticators;
+using RpgCalendar.ApiClients.InternalApi;
 using RpgCalendar.Utilities;
 using RpgCalendar.WebService;
 
@@ -50,7 +51,7 @@ public class RegisterUsers : TestTemplate
             var user = User.Prepare(Rnd.String()).WithToken(Rnd.String());
             
             AssertAll.Succeed(
-                () => Assert.That(() => user.Create(), Throws.Exception)
+                () => Assert.That(() => user.Create(), Throws.Exception.InstanceOf<InternalApiClient.Users.InternalAPIException>())
                 );
         }
         
