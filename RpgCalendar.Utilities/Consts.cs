@@ -4,6 +4,7 @@ namespace RpgCalendar.Utilities;
 public static class Consts
 {
     public const string DefaultPassword = "qwerty";
+    public const string DefaultEmail = "test@test.com";
     public static string EmailDomain => "rpgcalendar.pl";
 
     public static class Messages

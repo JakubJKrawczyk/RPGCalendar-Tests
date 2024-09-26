@@ -11,17 +11,9 @@ public class RegisterUsers : TestTemplate
 
     private User user;
 
-    [OneTimeTearDown]
-    public void OneTimeTearDown()
-    {
-        user.Delete();
-
-        //TODO: Zaimplementowac kody bledow
-    }
 
     #region Add
 
-        //TODO: zamiast sprawdzania Exception powinnismy sprawdzac errorCode
         [Test]
         public void RegisterValidUser()
         {
@@ -48,47 +40,48 @@ public class RegisterUsers : TestTemplate
         [Test]
         public void RegisterWithInvalidToken()
         {
-            var user = User.Prepare(Rnd.String()).WithToken(Rnd.String());
+            user = User.Prepare(Rnd.String()).Create();
             
             AssertAll.Succeed(
-                () => Assert.That(() => user.Create(), Throws.Exception.InstanceOf<InternalApiClient.Users.InternalAPIException>())
+                () => Assert.That(() => user.WithToken(Rnd.String()).CreateInternal(), Throws.Exception.InstanceOf<InternalApiClient.Users.InternalAPIException>())
                 );
         }
         
         [Test]
         public void RegisterWithExpiredToken()
         {
-            var user = User.Prepare(Rnd.String()).WithToken(UtillitiesTools.GenerateJwtToken(Rnd.String(), DateTime.Now.AddDays(-1)));
+            user = User.Prepare(Rnd.String()).Create();           
             
             AssertAll.Succeed(
-                () => Assert.That(() => user.Create(), Throws.Exception)
+                () => Assert.That(() => user.WithToken(UtillitiesTools.GenerateJwtToken(Rnd.NumbersToString(8), DateTime.Now.AddDays(-1))).CreateInternal(), Throws.Exception)
             );
         }
 
         [Test]
         public void RegisterUserWithEmptyToken()
         {
-            var user = User.Prepare(Rnd.String()).WithToken("");
+            user = User.Prepare(Rnd.String()).Create();
             
             AssertAll.Succeed(
-                () => Assert.That( () => user.Create(), Throws.Exception)
+                () => Assert.That( () => user.WithToken(string.Empty).CreateInternal(), Throws.Exception)
                 );
         }
 
         [Test]
         public void RegisterWithInvalidTokenContent()
         {
-            var user = User.Prepare(Rnd.String()).WithToken(UtillitiesTools.GenerateJwtToken(Rnd.String()));
+            user = User.Prepare(Rnd.String());
 
             AssertAll.Succeed(
-                ( )=> Assert.That(() => user.Create(), Throws.Exception)
+                ( )=> Assert.That(() => user.WithToken(UtillitiesTools.GenerateJwtToken(Rnd.String())).Create(), Throws.Exception)
             );
         }
 
         [Test]
         public void GetUserDataAfterRegistrationWithoutToken()
         {
-            var user = User.Prepare(Rnd.String()).Create();
+            const string username = "majtek";
+            user = User.Prepare(username).Create();
             user.WithToken("");
             
             AssertAll.Succeed(() => Assert.That(() => user.GetMe(), Throws.Exception));
@@ -97,11 +90,17 @@ public class RegisterUsers : TestTemplate
         [Test]
         public void GetUserDataAfterRegistration()
         {
-            user = User.Prepare(Rnd.String()).Create();
-            var tempName = user.DisplayName;
+            var username = Rnd.String();
+            user = User.Prepare(username).Create();
+            const string tempName = "zluusername";
             var us = user.GetMe();
             
-            AssertAll.Succeed(() => Assert.That(us.DisplayName, Is.EqualTo(tempName)));
+            AssertAll.Succeed(
+                () => Assert.That(us.DisplayName, Is.Not.EqualTo(tempName)),
+                () => Assert.That(us.DisplayName, Is.EqualTo(username)),
+                () => Assert.That(us.PrivateCode, Is.EqualTo(user.PrivateCode))
+                
+                );
         }
         
     #endregion

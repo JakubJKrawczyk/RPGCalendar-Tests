@@ -16,7 +16,7 @@ public class UtillitiesTools
             new Claim(ClaimTypes.Authentication ,content)
         };
         
-        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes( "Jas"));
+        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes( "rpgcalendar"));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var token = new JwtSecurityToken(
