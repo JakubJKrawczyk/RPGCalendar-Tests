@@ -12,7 +12,7 @@ public class TestFactory
 
     public User User { get; private set; }
 
-    public TestFactory PrepareUser(out User user, string? name = null)
+    public TestFactory WithUser(out User user, string? name = null)
     {
         name ??= Rnd.String();
 

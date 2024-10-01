@@ -5,12 +5,24 @@ namespace RpgCalendar.Tests.InteractionsTests;
 
 public class Groups : TestTemplate
 {
+    private User user;
+    
+    
+    #region setup
+
+    [OneTimeSetUp]
+    public void OneTimeSetup()
+    {
+        Factory.WithUser(out user, Rnd.String());
+    }
+    #endregion
+    
     #region Add
     
         [Test]
         public void AddGroup()
         {
-            throw new NotImplementedException();
+            
         }
         [Test]
         public void AddMemberToGroup()

@@ -18,7 +18,7 @@ public class User()
         uc = new userCredentials(username ?? user.displayName, password);
     }
 
-    public Guid UserId => u.id;
+    public Guid? UserId => u.id;
     public string DisplayName => u.displayName;
     public string PrivateCode => u.privateCode;
 

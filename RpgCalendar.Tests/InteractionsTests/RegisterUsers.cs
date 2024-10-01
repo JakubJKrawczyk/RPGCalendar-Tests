@@ -43,7 +43,7 @@ public class RegisterUsers : TestTemplate
             user = User.Prepare(Rnd.String()).Create();
             
             AssertAll.Succeed(
-                () => Assert.That(() => user.WithToken(Rnd.String()).CreateInternal(), Throws.Exception.InstanceOf<InternalApiClient.Users.InternalAPIException>())
+                () => Assert.That(() => user.WithToken(Rnd.String()).CreateInternal(), Throws.Exception.InstanceOf<InternalApiClient.InternalAPIException>())
                 );
         }
         
@@ -92,13 +92,12 @@ public class RegisterUsers : TestTemplate
         {
             var username = Rnd.String();
             user = User.Prepare(username).Create();
-            const string tempName = "zluusername";
             var us = user.GetMe();
             
             AssertAll.Succeed(
-                () => Assert.That(us.DisplayName, Is.Not.EqualTo(tempName)),
                 () => Assert.That(us.DisplayName, Is.EqualTo(username)),
-                () => Assert.That(us.PrivateCode, Is.EqualTo(user.PrivateCode))
+                () => Assert.That(us.PrivateCode, Is.EqualTo(user.PrivateCode)),
+                () => Assert.That(us.UserId, Is.Not.EqualTo(Guid.Empty))
                 
                 );
         }
