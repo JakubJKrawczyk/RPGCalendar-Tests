@@ -9,13 +9,13 @@ public record Groups(List<group> GroupList);
 
 public partial class InternalApiClient
 {
-    public partial class Groups
+    public class Groups
     {
         
-        public List<group> getUserGroups()
+        public List<group> getUserGroups(Guid userId)
         {
-            RestRequest request = new RestRequest("/groups");
-
+            RestRequest request = new RestRequest($"/groups/{userId}", Method.Get);
+            
             var response = Execute<List<group>>(request);
             
            return response;
