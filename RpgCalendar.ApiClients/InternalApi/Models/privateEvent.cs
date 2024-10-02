@@ -3,43 +3,34 @@ using NUnit.Framework.Constraints;
 
 namespace RpgCalendar.ApiClients.InternalApi.Models;
 
-public class usersAbsences {
-    public TimeSpan startingHour { get; set; }
-    public DateOnly startingDay { get; set; }
-    public DateOnly endingDay { get; set; }
-    public TimeSpan endingHour { get; set; }
-}
-public class listEvent {
-    public string title { get; set; }
-    public string description { get; set; }
-    public TimeSpan startingHour { get; set; }
-    public DateOnly startingDay { get; set; }
-    public DateOnly endingDay { get; set; }
-    public TimeSpan endingHour { get; set; }
-}
-public class addEvent {
-    public Guid privateEventId { get; set; }
-    public string title { get; set; }
-    public string description { get; set; }
-    public DateOnly startingDay { get; set; }
-    public DateOnly endingDay { get; set; }
-    public Boolean isOnLine { get; set; } // Nie wiem czy dobrze
-    public string eventLocation { get; set; }
-}
-public class deleteEvent {
-    public Guid privateEventId { get; set; }
-    public string title { get; set; }
-    public string description { get; set; }
-    public DateOnly startingDay { get; set; }
-    public DateOnly endingDay { get; set; }
-    public Boolean isOnLine { get; set; } // Nie wiem czy dobrze
-    public string eventLocation { get; set; }
-}
-public class modifyEvent {
-    public string title { get; set; }
-    public string description { get; set; }
-    public DateOnly startingDay { get; set; }
-    public DateOnly endingDay { get; set; }
-    public Boolean isOnLine { get; set; } // Nie wiem czy dobrze
-    public string eventLocation { get; set; }
-}
+    public class usersAbsences
+    {
+        public TimeSpan StartingHour { get; set; }
+        public DateOnly StartingDay { get; set; }
+        public DateOnly EndingDay { get; set; }
+        public TimeSpan EndingHour { get; set; }
+    }
+
+    public class listEvent
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public TimeSpan StartingHour { get; set; }
+        public TimeSpan EndingHour { get; set; }
+        public DateOnly StartingDay { get; set; }
+        public DateOnly EndingDay { get; set; }
+    }
+
+    public class privateEvent
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public TimeSpan StartingHour { get; set; }
+        public TimeSpan EndingHour { get; set; }
+        public DateOnly StartingDay { get; set; }
+        public DateOnly EndingDay { get; set; }
+        public bool IsOnLine { get; set; } =
+            false; // Nie wiem czy dobrze ( według internetu "bool" jest lepsze od "Boolean" => reprezentuje tę samą wartość logiczną (truth/false), W TYM PRZYPADKU DOMYŚLNIE "false" 
+        
+        public string eventLocation { get; set; }
+    }

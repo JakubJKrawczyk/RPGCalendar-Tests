@@ -20,20 +20,23 @@ public partial class InternalApiClient
             
            return response;
         }
-
-        public Group addGroup()
+        public Group addGroup(string name, string profilePicture)
         {
             return null;
         }
 
         public Group getUserGroup(Guid groupId)
         {
-            return null;
+            RestRequest request = new RestRequest($"/groups/{groupId}", Method.Get);
+            
+            var groupResult = Execute<Group>(request);
+            
+            return groupResult;
         }
 
         public void updateGroup(group group)
         {
-            return;
+            return ;
         }
 
         public void deleteGroup(Guid groupId)
