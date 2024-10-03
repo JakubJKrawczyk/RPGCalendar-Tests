@@ -2,16 +2,12 @@
 
 public class absenceUsersManager
 {
-    // Użycie List zamiast tablicy
     public List<usersAbsences> AbsencesList { get; set; }
 
     public absenceUsersManager()
     {
-        // Inicjalizacja listy
-        AbsencesList = new List<usersAbsences>(); // Tworzenie pustej listy
+        AbsencesList = new List<usersAbsences>();
     }
-
-    // Metoda do dodawania nieobecności
     public void AddAbsence(usersAbsences absence)
     {
         AbsencesList.Add(absence);

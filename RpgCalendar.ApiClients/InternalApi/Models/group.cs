@@ -10,12 +10,5 @@ public class group
     public string ProfilePicture { get; set; }
     public DateTime CreatedAt { get; set; }
     
-    public group(string name, string profilePicture)
-    {
-        Id = Guid.NewGuid();
-        Name = name;
-        ProfilePicture = profilePicture;
-        CreatedAt = DateTime.UtcNow;
-    }
 }
 

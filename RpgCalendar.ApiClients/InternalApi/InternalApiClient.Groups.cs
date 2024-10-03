@@ -20,9 +20,21 @@ public partial class InternalApiClient
             
            return response;
         }
-        public Group addGroup(string name, string profilePicture)
+        public group addGroup(string name, string profilePicture)
         {
-            return null;
+            var newGroup = new group
+            {
+                Name = name,
+                ProfilePicture = profilePicture
+            };
+            
+            RestRequest request = new RestRequest("/groups", Method.Post);
+            
+            request.AddJsonBody(newGroup);
+            
+            var response = Execute<group>(request);
+            
+            return response;
         }
 
         public Group getUserGroup(Guid groupId)
