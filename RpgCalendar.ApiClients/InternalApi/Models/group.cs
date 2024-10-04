@@ -9,6 +9,9 @@ public class group
     public string Name { get; set; }
     public string ProfilePicture { get; set; }
     public DateTime CreatedAt { get; set; }
-    
 }
 
+public class inviteLinkResponse
+{
+    public string InviteLink { get; set; }
+}
