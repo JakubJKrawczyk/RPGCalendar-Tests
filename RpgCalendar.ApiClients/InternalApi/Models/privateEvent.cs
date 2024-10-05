@@ -11,16 +11,6 @@ namespace RpgCalendar.ApiClients.InternalApi.Models;
         public TimeSpan EndingHour { get; set; }
     }
 
-    public class listEvent
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public TimeSpan StartingHour { get; set; }
-        public TimeSpan EndingHour { get; set; }
-        public DateOnly StartingDay { get; set; }
-        public DateOnly EndingDay { get; set; }
-    }
-
     public class privateEvent
     {
         public string Title { get; set; }
