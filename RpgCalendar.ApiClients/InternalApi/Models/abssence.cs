@@ -1,15 +1,7 @@
 ﻿namespace RpgCalendar.ApiClients.InternalApi.Models;
 
-public class absenceUsersManager
+public class absence
 {
-    public List<usersAbsences> AbsencesList { get; set; }
-
-    public absenceUsersManager()
-    {
-        AbsencesList = new List<usersAbsences>();
-    }
-    public void AddAbsence(usersAbsences absence)
-    {
-        AbsencesList.Add(absence);
-    }
+    public DateTime StartingDay { get; set; }
+    public DateTime EndingDay { get; set; }
 }

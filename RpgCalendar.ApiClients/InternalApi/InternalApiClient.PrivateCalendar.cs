@@ -3,23 +3,22 @@ using RpgCalendar.ApiClients.InternalApi.Models;
 
 namespace RpgCalendar.ApiClients.InternalApi;
 
-// Ta sama sytuacja co w przypadku InternalApiClient.Group.cs.
 public partial class InternalApiClient
 {
     public class PrivateCalendar
     {
-        public List<usersAbsences> getUsersAbsences(Guid userId)
+        public List<absence> getUsersAbsences(Guid userId)
         {
             RestRequest request = new RestRequest($"/users/{userId}/calendar/absences", Method.Get);
 
-            var response = Execute<List<usersAbsences>>(request);
+            var response = Execute<List<absence>>(request);
             
             return response;
         }
         
-        public List<privateEvent> getListEvents(Guid eventId, Guid userId)
+        public List<privateEvent> getListEvents(Guid userId)
         {
-            RestRequest request = new RestRequest($"/users/{userId}/calendar/events/{eventId}", Method.Get);
+            RestRequest request = new RestRequest($"/users/{userId}/calendar/events/", Method.Get);
 
             var response = Execute<List<privateEvent>>(request);
 
@@ -32,7 +31,7 @@ public partial class InternalApiClient
             
             RestRequest request = new RestRequest($"users/{userId}/calendar/events/{eventId}", Method.Post);
             
-            request.AddJsonBody(newEvent);
+            request.AddBody(newEvent);
 
             var response = Execute<privateEvent>(request);
             
@@ -46,26 +45,24 @@ public partial class InternalApiClient
             var response = Execute(request);
         }
 
-        public privateEvent updateEvent(Guid eventId, Guid userId)
+        public privateEvent updateEvent(privateEvent Event, Guid userId)
         {
             var updatedEvent = new privateEvent();
             
-            RestRequest request = new RestRequest($"users/{userId}/calendar/events/{eventId}", Method.Put);
+            RestRequest request = new RestRequest($"users/{userId}/calendar/events/{Event.Id}", Method.Put);
             
-            request.AddJsonBody(updatedEvent);
+            request.AddBody(updatedEvent);
             
             var response = Execute<privateEvent>(request);
     
             return response;
         }
 
-        public privateEvent modifyEvent(Guid eventId, Guid userId)
+        public privateEvent modifyEvent(privateEvent Event, Guid userId)
         {
-            var modifyEvent = new privateEvent();
+            RestRequest request = new RestRequest($"users/{userId}/calendar/events/{Event.Id}", Method.Put);
             
-            RestRequest request = new RestRequest($"users/{userId}/calendar/events/{eventId}", Method.Put);
-            
-            request.AddJsonBody(modifyEvent);
+            request.AddBody(modifyEvent);
             
             var response = Execute<privateEvent>(request);
     

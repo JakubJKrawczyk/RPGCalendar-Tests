@@ -23,17 +23,11 @@ public partial class InternalApiClient
             
            return response;
         }
-        public group addGroup(string name, string profilePicture)
+        public group addGroup(group group)
         {
-            var newGroup = new group
-            {
-                Name = name,
-                ProfilePicture = profilePicture
-            };
-            
             RestRequest request = new RestRequest("/groups", Method.Post);
             
-            request.AddJsonBody(newGroup);
+            request.AddBody(group);
             
             var response = Execute<group>(request);
             
@@ -53,7 +47,7 @@ public partial class InternalApiClient
         {
             RestRequest request = new RestRequest($"/groups/{group.Id}", Method.Patch);
             
-            request.AddJsonBody(group);
+            request.AddBody(group);
             
             var respose = Execute(request);
         }
@@ -76,14 +70,11 @@ public partial class InternalApiClient
 
         public void addUserToGroup(Guid groupId, Guid userId)
         {
-            RestRequest request = new RestRequest($"/groups/{groupId}/users", Method.Post);
+            var group = new group(); 
             
-            var body = new
-            {
-                UserId = userId
-            };
+            RestRequest request = new RestRequest($"/groups/{groupId}/users/{userId}", Method.Post);
             
-            request.AddJsonBody(body);
+            request.AddBody(group);
             
             var response = Execute(request);
         }
